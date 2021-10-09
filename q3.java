@@ -1,37 +1,49 @@
-package recusion2;
+package recusion3;
+
+import java.util.Arrays;
 
 public class q3 {
-  static int max=Integer.MIN_VALUE; 
-	public static void main(String[] args) 
-	{
-		int a[][]={{1,2,3},
-			     {4,5,6},
-			     {7,8,9}};
-		
-		
 
-		PrintMaxNo(a,0,0,max);
-		System.out.println(max);
+	public static void main(String[] args) {
+		 int[]a= {11,78,9,6,86,3,2,1};
+	    printMyArrays(a,1);
+	      System.out.println(Arrays.toString(a));
 	}
 
-	private static void PrintMaxNo(int[][] a, int i, int j, int max) 
+	private static void printMyArrays(int[] a, int i)
 	{
-		maxInMaxtrix(a,i,0,max);
-		i++;
-		if(i<a.length)
-		PrintMaxNo(a, i, j, max);
-	}
-
-	private static void maxInMaxtrix(int[][] a, int i, int j, int max) 
-	{
-		if(a[i][j]>max)
-		{
-			max=a[i][j];
-		}
-		j++;
-		if(j<a[i].length)
-			maxInMaxtrix(a, i, j, max);
+		 int temp=a[i];
+	     int start1=ForJLoop(a,i,temp,0,i-1);
+	    forkLoop(a,i,temp,start1,i-1);
+        a[start1]=temp;
+        i++;
+        if(i<a.length)
+        	printMyArrays(a, i);
 		
 	}
+
+	private static void forkLoop(int[] a, int i, int temp, int start1, int k) 
+	{
+		a[k+1]=a[k];
+		k--;
+		if(k>=start1)
+			forkLoop(a, i, temp, start1, k);
+		
+	}
+
+	private static int ForJLoop(int[] a, int i, int temp, int start, int j) {
+		if(a[j]<temp)
+			 {
+				 start=j+1;
+				 return start;
+			 }
+		j--;
+		if(j>=0)
+			return ForJLoop(a, i, temp, start, j);
+		  return 0;
+		
+	}
+
+	
 
 }
